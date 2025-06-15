@@ -47,8 +47,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="pegawai in filteredPegawai" :key="pegawai.id">
-          <td class="p-2 border">{{ pegawai.id }} </td>
+        <tr v-for="(pegawai, index) in filteredPegawai" :key="pegawai.id">
+          <td class="p-2 border">{{ index + 1 }} </td>
           <td class="p-2 border">{{ pegawai.name }} {{ pegawai.last_name }} </td>
           <td class="p-2 border">{{ pegawai.gender }}</td>
           <td class="p-2 border">{{ pegawai.birth_date }}</td>
