@@ -1,4 +1,4 @@
-1. Setup database MySQL :sesuaikan file dbconn sesuai config database mu
+1. Setup database MySQL :sesuaikan file dbconn.php sesuai config database mu
 2. create table sesuai query terlampir pada db mu:
    
 ```sql
