@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Pegawai</title>
+  <script defer src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+  <script defer src="src/main.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+  <div id="app" class="xl:max-w-4xl md:max-w-3xl mx-auto bg-white p-6 rounded shadow">
+    <h1 class="text-2xl font-bold mb-4">Data Pegawai</h1>
+
+<form @submit.prevent="tambahPegawai" class="mb-6 grid grid-cols-2 gap-4">
+  <input v-model="form.name" type="text" placeholder="Nama Depan" class="p-2 border rounded" required>
+  <input v-model="form.last_name" type="text" placeholder="Nama Belakang" class="p-2 border rounded" required>
+  <input v-model="form.birth_date" type="date" class="p-2 border rounded">
+  <select v-model="form.gender" class="p-2 border rounded" required>
+    <option value="">Pilih Gender</option>
+    <option value="Laki-laki">Laki-laki</option>
+    <option value="Perempuan">Perempuan</option>
+  </select>
+  <input v-model="form.email" type="text" placeholder="Email" class="p-2 border rounded" @input="errors.data = ''" required>
+  <input v-model="form.phone_number" type="text" placeholder="No HP" class="p-2 border rounded" @input="errors.data = ''" required>
+  <p v-if="errors.data" class="text-red-500 text-sm mt-1">{{ errors.data }}</p>
+  <button type="submit" class="col-span-2 bg-blue-500 text-white p-2 rounded hover:bg-blue-600">{{ editMode ? 'Simpan Pegawai' : 'Tambah Pegawai' }}</button>
+  <button type="button" @click="resetForm" class="col-span-2 bg-gray-400 text-white p-2 rounded hover:bg-gray-500">Reset Form</button>
+</form>
+<input
+  v-model="keyword"
+  type="text"
+  placeholder="Cari nama depan / belakang / gender..."
+  class="p-2 border rounded w-full mb-4"
+/>
+
+    <table class="w-full table-auto border">
+      <thead>
+        <tr class="bg-gray-200">
+          <th class="p-2 border">ID</th>
+          <th class="p-2 border">Nama</th>
+          <th class="p-2 border">Jenis Kelamin</th>
+          <th class="p-2 border">Tanggal Lahir</th>
+          <th class="p-2 border">E-mail</th>
+          <th class="p-2 border">No Telepon</th>
+          <th class="p-2 border">Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="pegawai in filteredPegawai" :key="pegawai.id">
+          <td class="p-2 border">{{ pegawai.id }} </td>
+          <td class="p-2 border">{{ pegawai.name }} {{ pegawai.last_name }} </td>
+          <td class="p-2 border">{{ pegawai.gender }}</td>
+          <td class="p-2 border">{{ pegawai.birth_date }}</td>
+          <td class="p-2 border">{{ pegawai.email }}</td>
+          <td class="p-2 border">{{ pegawai.phone_number }}</td>
+          <td class="p-2 border space-x-2">
+            <div class="flex">
+                <button @click="isiForm(pegawai)" class="bg-yellow-400 text-white px-2 py-1 mr-1 rounded">Edit</button>
+                <button @click="hapusPegawai(pegawai.id)" class="bg-red-500 text-white px-2 py-1 rounded">Hapus</button>
+            </d>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
